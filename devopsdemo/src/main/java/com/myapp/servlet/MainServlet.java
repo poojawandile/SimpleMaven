@@ -38,7 +38,7 @@ public class MainServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.println(" ********* -  INSIDE DO POST OF THE MAIN SERVLET ------   ***************");
+		System.out.println(" ######  %%%% -  INSIDE THE DO POST OF THE MAIN SERVLET %%%%  ######");
 				
 		String strPrimeElements = request.getParameter("numOfPrimeNumbers");
 		String strFibElements = request.getParameter("numOfFibElements");
