@@ -71,7 +71,7 @@
 
 			<tbody>
 				<tr style="height: 103px;">
-					<td style="width: 200px; height: 103px;"><strong>Number of Prime numbers </strong></td>
+					<td style="width: 200px; height: 103px;"><strong>Give Number of Prime numbers </strong></td>
 					<td style="width: 10px; height: 103px;">
 						<input name="numOfPrimeNumbers" type="text" />
 						<!--  <input name="Action" type="hidden" value="GeneratePrimeNumbers" />  -->
