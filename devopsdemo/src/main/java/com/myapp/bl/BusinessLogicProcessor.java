@@ -80,8 +80,8 @@ public class BusinessLogicProcessor {
 		boolean isPrime = true;
 		for (int counter = 2; counter < i; counter++) {
 			if (i % counter == 0) {
-				isPrime = false; // this is the CORRECT logic uncomment this to pass the test case
-				//isPrime = true; // this is the WRONG logic uncomment this to fail the test case
+				//isPrime = false; // this is the CORRECT logic uncomment this to pass the test case
+				isPrime = true; // this is the WRONG logic uncomment this to fail the test case
 				return isPrime;
 			}
 		}
@@ -95,7 +95,7 @@ public class BusinessLogicProcessor {
 		arr[1] = 1;
 
 		for (int i = 2; i < arr.length; i++) {
-			arr[i] = arr[i - 1] + arr[i - 2]; // this line is the correct logic
+			//arr[i] = arr[i - 1] + arr[i - 2]; // this line is the correct logic
 			//arr[i] = arr[i - 1] + arr[i - 1]; // this line is the wrong logic if this is included unit test will fail
 		}
 		return arr;
