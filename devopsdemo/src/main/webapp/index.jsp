@@ -114,6 +114,7 @@
 							if (sortedNumbers.equals("null")) {
 								sortedNumbers = "";
 							}
+							
 							session.removeAttribute("SortedNumbers");
 						%> <strong><%=sortedNumbers%></strong>
 					</td>
