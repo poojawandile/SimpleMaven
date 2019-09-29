@@ -14,8 +14,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.myapp.bl.BusinessLogicProcessor;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 
 public class BusinessLogicTest {
 	private BusinessLogicProcessor busLogic;

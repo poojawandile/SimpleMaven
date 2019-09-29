@@ -120,6 +120,16 @@
 					</td>
 				</tr>
 			</tbody>
+			<tbody>
+			<thead>
+			<tr style="height: 23px;">
+					<td style="text-align: center; width: 200px; height: 23px;">&nbsp;</td>
+					<td style="text-align: center; width: 10px; height: 23px;">&nbsp;</td>
+					<td style="text-align: center; width: 150px; height: 23px; color:white; font-size: x-large;"><strong>Have a Nice Day</strong></td>
+					<td style="text-align: center; width: 111px; height: 23px;">&nbsp;</td>
+				</tr>
+			</thead>	
+			</tbody>
 			
 		</table>
 	</form>
