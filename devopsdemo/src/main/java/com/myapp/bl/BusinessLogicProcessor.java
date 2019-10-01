@@ -88,9 +88,9 @@ public class BusinessLogicProcessor {
 		return isPrime;
 	}
 
-	public int[] generateFibSeries(int len) {
+	public long[] generateFibSeries(int len) {
 		// This is my second commit for BLP class only.
-		int arr[] = new int[len];
+		long arr[] = new long[len];
 		arr[0] = 0;
 		arr[1] = 1;
 
