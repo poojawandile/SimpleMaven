@@ -25,19 +25,17 @@ public class StepDefinition {
 	String appUrl;
 	String chromeDriver;
 	String chromeExe;
-	
-	
+
 	@Given("^Open Chrome browser and my App$")
 	public void openChromeAndmyapp() {
-		
+				
 		PropertyLoader propLoader = new PropertyLoader();
 		propLoader.readProperty();
 		browserHead = propLoader.browserHead;
 		appUrl = propLoader.appUrl;
 		chromeDriver = propLoader.chromeDriver;
 		chromeExe = propLoader.chromeExe;
-		
-		
+
 		System.setProperty("webdriver.chrome.driver", chromeDriver);
 		System.setProperty("webdriver.chrome.bin", chromeExe);
 		createDriver();
@@ -68,6 +66,7 @@ public class StepDefinition {
 			String actualStr = driver.findElement(By.xpath("/html/body/form/table/tbody[1]/tr/td[4]/strong")).getText();
 			System.out.println("actualStr **** eeee" + actualStr);
 			assertEquals(expectedResult, actualStr);
+			Thread.sleep(3000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,13 +74,13 @@ public class StepDefinition {
 
 	@When("^I give input for Prime Num \"([^\"]*)\"$")
 	public void i_give_input_for_Prime_Num(String arg1) {
-			driver.findElement(By.name("numOfPrimeNumbers")).sendKeys(arg1);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		driver.findElement(By.name("numOfPrimeNumbers")).sendKeys(arg1);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Then("^Click on Generate Prime numbers$")
@@ -93,6 +92,12 @@ public class StepDefinition {
 	public void i_get_output_for_prime(String expectedPrimes) {
 		String actualPrimes = driver.findElement(By.xpath("/html/body/form/table/tbody[2]/tr/td[4]/strong")).getText();
 		assertEquals(expectedPrimes, actualPrimes);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 
 	}
 
@@ -123,13 +128,47 @@ public class StepDefinition {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Then("^I get \"([^\"]*)\"$")
 	public void i_get(String expectedMsg) {
 		String actualMsg = driver.findElement(By.xpath("/html/body/form/table/thead[2]/tr/td[3]/strong")).getText();
 		assertEquals(expectedMsg, actualMsg);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 	}
-	
+
+	@When("^I give a number \"([^\"]*)\"$")
+	public void i_give_a_number(String numberialStr) {
+		driver.findElement(By.xpath("/html/body/form/table/tbody[4]/tr/td[2]/input")).sendKeys(numberialStr);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+	@Then("^I click generate number in words$")
+	public void i_click_generate_number_in_words()  {
+		driver.findElement(By.xpath("/html/body/form/table/tbody[4]/tr/td[3]/span/input")).click();
+	}
+
+	@Then("^I get in words \"([^\"]*)\"$")
+	public void i_get_in_words(String expectedMsg)  {
+		String actualMsg = driver.findElement(By.xpath("/html/body/form/table/tbody[4]/tr/td[4]/strong")).getText();
+		assertEquals(expectedMsg, actualMsg);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
 	@Then("^Close Browser$")
 	public void close_Browser() throws Throwable {
 		System.out.println("INside close ******** &&&&&&& ");
@@ -141,10 +180,7 @@ public class StepDefinition {
 
 	@SuppressWarnings("deprecation")
 	private void createDriver() {
-		
 
-		
-		
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		Map<String, Object> prefs = new HashMap<String, Object>();

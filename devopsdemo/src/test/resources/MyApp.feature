@@ -44,6 +44,11 @@ Feature: Test the Fib, Prime and Sorting of numbers
     	Then I click on sort numbers
     	Then I get sorted numbers "[0, 1, 1, 2, 2, 2, 3, 3, 4, 5, 6, 7, 10, 15, 22, 23, 34, 56, 78, 90, 1000, 2635, 19887, 77764]"
     	
+    Scenario: Test for generating number in words
+    	When I give a number "9999,99,99,999"
+    	Then I click generate number in words
+    	Then I get in words "nine thousand nine hundred and ninty nine crore ninty nine lakh ninty nine thousand nine hundred and ninty nine"
+    	
     Scenario: Test for nice day message
     	Then I get "Have a Nice Day"	
     	

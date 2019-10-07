@@ -102,7 +102,7 @@
 					<td style="width: 200px; height: 103px;"><strong>Comma Separated numbers</strong></td>
 					<td style="width: 10px; height: 103px;">
 						<input name="sortNumbers" type="text" />
-						<!-- <input name="Action" type="hidden" value="SortNumbers" /></td>  -->
+						
 					<td style="width: 150px; height: 103px;"><span
 						style="line-height: 35px;"><input type="Submit"
 							value="Seln Sort the numbers" /> </span></td>
@@ -117,6 +117,27 @@
 							
 							session.removeAttribute("SortedNumbers");
 						%> <strong><%=sortedNumbers%></strong>
+					</td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr style="height: 103px;">
+					<td style="width: 200px; height: 103px;"><strong>Give number in numerical</strong></td>
+					<td style="width: 10px; height: 103px;">
+						<input name="numericals" type="text" />
+						
+					<td style="width: 150px; height: 103px;"><span
+						style="line-height: 35px;"><input type="Submit"
+							value="Generate the numerical in words" /> </span></td>
+					<td style="width: 210px; height: 103px; text-align: left;">
+						<%
+						Object obj3 = request.getSession().getAttribute("numInWords");
+						String numInWordsStr = new String("");
+						if(obj3 != null){
+							numInWordsStr = obj3.toString();
+						}
+						session.removeAttribute("numInWords");
+						%><strong><%=numInWordsStr%></strong>
 					</td>
 				</tr>
 			</tbody>
