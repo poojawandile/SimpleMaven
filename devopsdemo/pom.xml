@@ -46,6 +46,26 @@
 			<version>3.141.59</version>
 		</dependency>
 
+		<!-- Togglz core module (mandatory) -->
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-core</artifactId>
+			<version>2.6.1.Final</version>
+		</dependency>
+
+		<!-- Togglz for Servlet environments (mandatory for webapps) -->
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-servlet</artifactId>
+			<version>2.6.1.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.togglz</groupId>
+			<artifactId>togglz-console</artifactId>
+			<version>2.6.1.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<properties>
@@ -89,12 +109,12 @@
 				<configuration>
 					<skipTests>false</skipTests>
 					<testFailureIgnore>true</testFailureIgnore>
-					
+
 				</configuration>
 			</plugin>
 			<!-- Mahendra Trial to try war creation even though test fails -->
-			
-			
+
+
 		</plugins>
 	</build>
 

@@ -1,4 +1,5 @@
 <%@ page import="java.util.*"%>
+<%@ page import="com.myapp.toggle.*"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -120,6 +121,14 @@
 					</td>
 				</tr>
 			</tbody>
+			<%
+				boolean genNumInWords = MyFeatures.FEATURE_GEN_NUMBERS.isActive();
+				System.out.println(" &&&&&&& ******* - FEATURE_GEN_NUMBERS >>"+genNumInWords);
+				boolean featureTwo = MyFeatures.FEATURE_TWO.isActive();
+				System.out.println(" &&&&&&& ******* - featureTwo >>"+featureTwo);
+				if (genNumInWords)
+				{
+			%>
 			<tbody>
 				<tr style="height: 103px;">
 					<td style="width: 200px; height: 103px;"><strong>Give number in numerical</strong></td>
@@ -141,6 +150,7 @@
 					</td>
 				</tr>
 			</tbody>
+			<% } %>
 			<tbody>
 			<thead>
 			<tr style="height: 23px;">

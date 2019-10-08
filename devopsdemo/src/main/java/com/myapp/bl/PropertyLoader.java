@@ -11,6 +11,7 @@ public class PropertyLoader {
 	public String browserHead;
 	public String chromeDriver;
 	public String chromeExe;
+	public String togglzFilePath;
 	
 	public void readProperty() {
 	
@@ -23,6 +24,7 @@ public class PropertyLoader {
 			
 			chromeDriver = prop.getProperty("chromeDriver");
 			chromeExe = prop.getProperty("chromeExe");
+			togglzFilePath = prop.getProperty("togglzFile");
 			
 			System.out.println(chromeDriver);
 			System.out.println(chromeExe);
