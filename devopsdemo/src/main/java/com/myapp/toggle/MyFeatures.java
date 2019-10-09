@@ -7,12 +7,13 @@ import org.togglz.core.context.FeatureContext;
 
 public enum MyFeatures implements Feature {
 
-    
+    @EnabledByDefault
     @Label("Generate Number in word format")
     FEATURE_GEN_NUMBERS,
     
-    @Label("Second Feature")
-    FEATURE_TWO;
+    @EnabledByDefault
+    @Label("Generate sorted numbers")
+    FEATURE_SORT_NUMBERS;
     
     public boolean isActive() {
         return FeatureContext.getFeatureManager().isActive(this);
