@@ -1,5 +1,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.myapp.toggle.*"%>
+<%@ page import="java.security.Principal"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -36,8 +37,8 @@
 			style="vertical-align: top; width: 1000px; height: 135px;">
 			<thead>
 				<tr style="height: 23px;">
-					<td style="text-align: center; width: 200px; height: 23px;">&nbsp;</td>
-					<td style="text-align: center; width: 10px; height: 23px;">&nbsp;</td>
+					<td style="text-align: center; width: 200px; height: 23px;"><strong></strong></td>
+					<td style="text-align: center; width: 10px; height: 23px;"></td>
 					<td style="text-align: center; width: 150px; height: 23px;">&nbsp;</td>
 					<td style="text-align: center; width: 111px; height: 23px;">&nbsp;</td>
 				</tr>
@@ -64,6 +65,8 @@
 								fibSeries = obj.toString();
 							}
 							session.removeAttribute("Fibseries");
+							
+							
 						%> <strong> <%=fibSeries%>
 					</strong>
 					</td>
@@ -90,6 +93,7 @@
 							if(obj1 != null){
 								primeNumbers = obj1.toString();
 							}
+							
 							session.removeAttribute("PrimeNumbers");
 						%> 
 						<strong><%=primeNumbers%></strong>
@@ -99,6 +103,7 @@
 			</tbody>
 			
 			<%
+			
 				boolean genNumInWords = MyFeatures.FEATURE_GEN_NUMBERS.isActive();
 				System.out.println(" &&&&&&& ******* - FEATURE_GEN_NUMBERS >>"+genNumInWords);
 				boolean sortNumbersFeatures = MyFeatures.FEATURE_SORT_NUMBERS.isActive();
@@ -152,12 +157,15 @@
 						if(obj3 != null){
 							numInWordsStr = obj3.toString();
 						}
+						
 						session.removeAttribute("numInWords");
 						%><strong><%=numInWordsStr%></strong>
 					</td>
 				</tr>
 			</tbody>
-			<% } %>
+			<% }
+				
+				%>
 			<tbody>
 			<thead>
 			<tr style="height: 23px;">
