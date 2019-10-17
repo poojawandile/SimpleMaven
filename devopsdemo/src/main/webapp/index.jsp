@@ -120,7 +120,7 @@
 						
 					<td style="width: 150px; height: 103px;"><span
 						style="line-height: 35px;"><input type="Submit"
-							value="Seln Sort the numbers" /> </span></td>
+							value="Bubble Sort the numbers" /> </span></td>
 					<td style="width: 210px; height: 103px; text-align: left;">
 						<%
 							Object obj2 = request.getSession().getAttribute("SortedNumbers");
