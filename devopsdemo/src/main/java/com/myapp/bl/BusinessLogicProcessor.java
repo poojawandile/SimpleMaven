@@ -91,6 +91,12 @@ public class BusinessLogicProcessor {
 	public long[] generateFibSeries(int len) {
 		// This is my second commit for BLP class only.
 		long arr[] = new long[len];
+		
+		if (len == 1) {
+			arr [0] = 0;
+			return arr;
+		}
+		
 		arr[0] = 0;
 		arr[1] = 1;
 
