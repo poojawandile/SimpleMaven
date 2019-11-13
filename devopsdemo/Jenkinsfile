@@ -1,0 +1,57 @@
+pipeline {
+  agent any
+  stages {
+    stage('XUnit') {
+      steps {
+        echo 'xunit'
+        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo') {
+          bat('cd')
+		  bat "mvn test -Dtest=!CucumberTests"
+        }
+      }
+    }
+	
+	stage('Build War') {
+      steps {
+        echo 'build War file'
+        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo') {
+          bat('cd')
+		  bat "mvn install -Dmaven.test.skip=true"
+        }
+      }
+    }
+	
+	stage('JACOCO') {
+      steps {
+        echo 'Java code coverage'
+        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo//target') {
+          bat('cd')
+		  jacoco()
+        }
+      }
+    }
+	
+	stage('Sonar Cloud Coverage') {
+      steps {
+        echo 'Sonar Cloud coverage'
+        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo') {
+          bat('cd')
+		  withCredentials([usernamePassword(credentialsId: 'a0655a46-5485-47aa-9429-4b49f18a05ea', passwordVariable: 'SONARPWD', usernameVariable: 'SONAR_LOGIN')]) {
+    bat "mvn -q -B -Dmaven.test.skip=true -Dcheckstyle.skip=true install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONARPWD  -Dsonar.organization=hottegithub -Dsonar.projectKey=hottegithub_SimpleMavenProj"
+}
+        }
+      }
+    }
+	
+	stage('Deploy to Server') {
+      steps {
+        echo 'Deploying to server'
+        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo//target') {
+          bat('cd')
+		  deploy adapters: [tomcat9(credentialsId: 'b4fd96ff-cced-4786-80d9-893053535f2c', path: '', url: 'http://localhost:8081')], contextPath: null, war: 'devopsTutorial.war'
+        }
+      }
+    }
+	
+  }
+}
