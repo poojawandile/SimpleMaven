@@ -19,6 +19,7 @@ public class BusinessLogicProcessor {
 	}
 
 	
+	
 	public int[] generatePrimeNums(int numOfDigits) {
 		
 		int primeArr[] = new int[numOfDigits];
