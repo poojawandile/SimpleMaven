@@ -1,20 +1,26 @@
 pipeline {
   agent any
   stages {
-    stage('XUnit') {
+    
+	stage('CheckOut-xUnit') {
       steps {
-        echo 'xunit'
-        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo') {
-          bat('cd')
-		  bat "mvn test -Dtest=!CucumberTests"
+        echo '>>>>>>> Checking out <<<<<<<<<<<<<<<<<<'
+        ws('D:\\Mahendra\\JenkinsWorkingFolder\\') {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e00500d3-ffa2-4190-8085-a6bf30fe0f50', url: 'https://github.com/hottegithub/SimpleMavenProj.git']]])
+		}
+		
+		ws('D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo'){
+		bat('cd')
+		bat "mvn test -Dtest=!CucumberTests"
+		xunit([JUnit(deleteOutputFiles: true, failIfNotNew: true, pattern: 'target\\surefire-reports\\*Test.xml', skipNoTestFiles: false, stopProcessingIfError: true)])
         }
       }
     }
 	
 	stage('Build War') {
       steps {
-        echo 'build War file'
-        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo') {
+        echo '>>>>>>>>> build War file <<<<<<<<<<<<<<'
+        ws('D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo') {
           bat('cd')
 		  bat "mvn install -Dmaven.test.skip=true"
         }
@@ -23,8 +29,8 @@ pipeline {
 	
 	stage('JACOCO') {
       steps {
-        echo 'Java code coverage'
-        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo//target') {
+	    echo '>>>>>>>>>>> Java code coverage <<<<<<<<<<<<'
+        ws('D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo'){
           bat('cd')
 		  jacoco()
         }
@@ -33,25 +39,38 @@ pipeline {
 	
 	stage('Sonar Cloud Coverage') {
       steps {
-        echo 'Sonar Cloud coverage'
-        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo') {
+        echo '>>>>>>>>>>>Sonar Cloud coverage <<<<<<<<<<<<<'
+        ws('D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo') {
           bat('cd')
 		  withCredentials([usernamePassword(credentialsId: 'a0655a46-5485-47aa-9429-4b49f18a05ea', passwordVariable: 'SONARPWD', usernameVariable: 'SONAR_LOGIN')]) {
-    bat "mvn -q -B -Dmaven.test.skip=true -Dcheckstyle.skip=true install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONARPWD  -Dsonar.organization=hottegithub -Dsonar.projectKey=hottegithub_SimpleMavenProj"
-}
+             bat "mvn -q -B -Dmaven.test.skip=true -Dcheckstyle.skip=true install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONARPWD  -Dsonar.organization=hottegithub -Dsonar.projectKey=hottegithub_SimpleMavenProj"
+	      }
         }
       }
     }
 	
 	stage('Deploy to Server') {
       steps {
-        echo 'Deploying to server'
-        ws('D://NewGitRepo//SimpleMavenProj//devopsdemo//target') {
+        echo '>>>>>>>>>> Deploying to server <<<<<<<<<<<<'
+		
+        ws('D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo\\target') {
+		
           bat('cd')
 		  deploy adapters: [tomcat9(credentialsId: 'b4fd96ff-cced-4786-80d9-893053535f2c', path: '', url: 'http://localhost:8081')], contextPath: null, war: 'devopsTutorial.war'
         }
       }
     }
 	
+	stage('xUnit and BDD tests') {
+      steps {
+        echo '>>>>>>>>>> xUnit and BDD tests <<<<<<<<<<<<'
+        ws('D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo') {
+		bat('cd')
+		bat "mvn test"
+		
+		cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', jsonReportDirectory: 'D:\\Mahendra\\JenkinsWorkingFolder\\devopsdemo\\target', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+        }
+      }
+    }
   }
 }
